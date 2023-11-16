@@ -49,6 +49,7 @@ int main()
 {
   SIMD<double,4> a(1.,2.,3.,4.);
   SIMD<double,4> b(1.0);
+  SIMD<double,4> c(4.,3.,2.,1.);
   
   cout << "a = " << a << endl;
   cout << "b = " << b << endl;
@@ -70,5 +71,7 @@ int main()
   }
 
   cout << "Select(mask, a, b) = " << Select(mask, a,b) << endl;
-  
+
+  auto d = a*b-c;
+  cout << d << endl;
 }
