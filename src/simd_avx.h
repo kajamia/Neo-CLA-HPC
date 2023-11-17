@@ -106,20 +106,37 @@ namespace ASC_HPC
   
   inline auto operator/ (SIMD<double,4> a, SIMD<double,4> b) { return SIMD<double,4> (_mm256_div_pd(a.Val(), b.Val())); }
   inline auto operator/ (double a, SIMD<double,4> b) { return SIMD<double,4> (a)/b; }
+
 #ifdef __FMA__
   inline SIMD<double,4> FMA (SIMD<double,4> a, SIMD<double,4> b, SIMD<double,4> c)
   { return _mm256_fmadd_pd (a.Val(), b.Val(), c.Val()); }
 #endif
-
-  inline SIMD<mask64,4> operator>= (SIMD<int64_t,4> a , SIMD<int64_t,4> b)
+  //>= for integer
+  inline SIMD<mask64,4> operator>= (SIMD<int64_t,4> a, SIMD<int64_t,4> b)
   { // there is no a>=b, so we return !(b>a)
     return  _mm256_xor_si256(_mm256_cmpgt_epi64(b.Val(),a.Val()),_mm256_set1_epi32(-1)); }
-  
+  //>= for double
   inline auto operator>= (SIMD<double,4> a, SIMD<double,4> b)
   { return SIMD<mask64,4>(_mm256_cmp_pd (a.Val(), b.Val(), _CMP_GE_OQ)); }
-  
-
-  
+  //> for integer
+  inline SIMD<mask64,4> operator> (SIMD<int64_t,4> a, SIMD<int64_t,4> b)
+  { return _mm256_cmpgt_epi64(a.Val(),b.Val()); }
+  //> for double
+  inline auto operator> (SIMD<double,4> a, SIMD<double,4> b)
+  { return SIMD<mask64,4>(_mm256_cmp_pd (a.Val(), b.Val(), _CMP_GT_OQ)); }
+  //<= for integer
+  inline SIMD<mask64,4> operator<= (SIMD<int64_t,4> a, SIMD<int64_t,4> b)
+  { // there is no a<=b, so we return !(a>b)
+    return _mm256_xor_si256(_mm256_cmpgt_epi64(a.Val(),b.Val()),_mm256_set1_epi32(-1)); }
+  //<= for double
+  inline auto operator<= (SIMD<double,4> a, SIMD<double,4> b)
+  { return SIMD<mask64,4>(_mm256_cmp_pd (a.Val(), b.Val(), _CMP_LE_OQ)); }
+  //< for integer
+  inline SIMD<mask64,4> operator< (SIMD<int64_t,4> a, SIMD<int64_t,4> b)
+  {return b>a; }
+  //< for double
+  inline auto operator< (SIMD<double,4> a, SIMD<double,4> b)
+  { return SIMD<mask64,4>(_mm256_cmp_pd (a.Val(), b.Val(), _CMP_LT_OQ)); }
 }
 
 #endif
