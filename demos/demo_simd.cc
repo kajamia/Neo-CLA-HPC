@@ -62,6 +62,7 @@ int main()
  //TESTING COMPARISONS
  //===================
   /*
+  // the scalar value 2 is type-cast to the appropriate SIMD type
   auto mask1 = (2 >= double_test);
   auto mask2 = (2 >= int_test);
   auto mask3 = (2 > double_test);
@@ -79,6 +80,33 @@ int main()
   cout << "2 < " << double_test << " = " << mask7 << endl;
   cout << "2 < " << int_test << " = " << mask8 << endl;
   */
+
+ // TESTING DIVISION AND SQRT
+ //==========================
+  /* SIMD<double, 4> a(1, 3, 3.14, 42);
+  SIMD<double, 4> e(2, 2, 0.5, 0.33);
+
+  cout << a/e << endl;
+  cout << 3/e << endl;
+  cout << sqrt(e) << endl;
+
+  SIMD<double, 4> c = 3 * a;
+  SIMD<double, 4> d = a/e; */
+
+ // SIMD<double, 2>
+ //================
+  /* SIMD<double, 2> f(2, 3);
+  SIMD<double, 2> i(2, 2);
+  cout << f << endl;
+  cout << f.Lo() << endl;
+
+  SIMD<mask64, 2> mask9(_mm_cmp_pd(f.Val(),i.Val(), _CMP_GT_OQ));
+  cout << mask9 << endl;
+  double* g = new double[2];
+  g[0] = 100;
+  g[1] = 200;
+  SIMD<double, 2> h(g, mask9);
+  cout << h << endl; */
 
   {
     //SIMD<double,4> sa(&a[0], mask);
