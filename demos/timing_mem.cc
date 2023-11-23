@@ -148,5 +148,9 @@ int main()
       delete [] pa;
     }
 
+  int cnt = 0;
+  RunParallel(1000, [&cnt] (int i, int size) { cnt++; });
+  cout << "cnt = " << cnt << endl;
+
   
 }
