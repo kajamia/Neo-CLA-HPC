@@ -15,13 +15,20 @@ int main()
 
   StartWorkers(3);
   
+  std::mutex mut;
+  RunParallel(10, [&mut] (int i, int size) {
+  std::lock_guard<std::mutex> lock(mut);    
+  cout << "I am task " << i << " out of " << size << endl;
+  });
+
+  /*
   RunParallel(10, [] (int i, int size)
   {
     static Timer t("timer one");
     RegionTimer reg(t);
     cout << "I am task " << i << " out of " << size << endl;
   });
-
+  */
   
   RunParallel(6, [] (int i, int s)
   {
