@@ -106,7 +106,10 @@ int main()
   g[0] = 100;
   g[1] = 200;
   SIMD<double, 2> h(g, mask9);
-  cout << h << endl; */
+  cout << h << endl;
+
+  auto mask10 = (2 > int_test);
+  cout << mask10.Lo() << endl; */
 
   {
     //SIMD<double,4> sa(&a[0], mask);

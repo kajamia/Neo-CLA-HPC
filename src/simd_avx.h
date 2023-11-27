@@ -21,7 +21,7 @@ namespace ASC_HPC
    public:
     SIMD (__m128i _mask) : mask(_mask) { };
     SIMD (__m128d _mask) : mask(_mm_castpd_si128(_mask)) { ; }
-    // SIMD (mask64 mask1, mask64 mask2) : 
+    SIMD (int64_t i, int64_t j) : mask{_mm_set_epi64x(j, i)} {;}
     auto Val() const { return mask; }
     mask64 operator[](size_t i) const { return ( (int64_t*)&mask)[i] != 0; }
 
@@ -39,8 +39,8 @@ namespace ASC_HPC
     auto Val() const { return mask; }
     mask64 operator[](size_t i) const { return ( (int64_t*)&mask)[i] != 0; }
 
-    /* SIMD<mask64, 2> Lo() const { return SIMD<mask64,2>((*this)[0], (*this)[1]); }
-    SIMD<mask64, 2> Hi() const { return SIMD<mask64,2>((*this)[2], (*this)[3]); } */
+    SIMD<mask64, 2> Lo() const { return SIMD<mask64,2>((*this)[0], (*this)[1]); }
+    SIMD<mask64, 2> Hi() const { return SIMD<mask64,2>((*this)[2], (*this)[3]); }
   };
 
 
