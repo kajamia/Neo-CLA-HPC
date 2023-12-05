@@ -1,2 +1,2 @@
-# ASC-HPC
+# Neo-HPC
 Tools for high performance computing

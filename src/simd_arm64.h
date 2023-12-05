@@ -12,7 +12,7 @@
 */
 
 
-namespace ASC_HPC
+namespace Neo_HPC
 {
 
   template<>

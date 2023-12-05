@@ -1,9 +1,9 @@
 #ifndef TIMER_H
 #define TIMER_H
 
-#include<iostream>
-#include<string>
-#include<memory>
+#include <iostream>
+#include <string>
+#include <memory>
 #include <vector>
 #include <array>
 #include <chrono>
@@ -29,7 +29,7 @@
 
 
 
-namespace ASC_HPC
+namespace Neo_HPC
 {
 
 
